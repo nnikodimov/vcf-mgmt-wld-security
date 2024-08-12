@@ -68,7 +68,7 @@ resource "nsxt_policy_security_policy" "vcf_infrastructure" {
   scope        = [nsxt_policy_group.m01_wld.path, nsxt_policy_group.w01_wld.path]
 
    rule {
-    display_name       = "Allow Bastion to VCF"
+    display_name       = "Allow Bastion to VCF01"
     source_groups      = [nsxt_policy_group.bastion.path]
     destination_groups = [nsxt_policy_group.m01_wld.path, nsxt_policy_group.w01_wld.path]
     action             = "ALLOW"
@@ -76,7 +76,7 @@ resource "nsxt_policy_security_policy" "vcf_infrastructure" {
   }
 
     rule {
-    display_name       = "Allow VCF to InfraSvc"
+    display_name       = "Allow VCF01 to InfraSvc"
     source_groups      = [nsxt_policy_group.m01_wld.path, nsxt_policy_group.w01_wld.path]
     destination_groups = [nsxt_policy_group.infra_svc.path]
     services           = [data.nsxt_policy_service.dns-udp.path, data.nsxt_policy_service.dns-tcp.path, data.nsxt_policy_service.ntp.path, data.nsxt_policy_service.ssh.path, data.nsxt_policy_service.syslog_udp.path]
@@ -131,7 +131,7 @@ resource "nsxt_policy_security_policy" "vcf_environment" {
   scope        = [nsxt_policy_group.m01_wld.path, nsxt_policy_group.w01_wld.path]
   
    rule {
-    display_name       = "Allow VCF Management"
+    display_name       = "Allow VCF01 Management"
     source_groups      = [nsxt_policy_group.sddc_mgr.path]
     destination_groups = [nsxt_policy_group.m01_wld.path, nsxt_policy_group.w01_wld.path, nsxt_policy_group.m01_edges.path, nsxt_policy_group.m01_hosts.path, nsxt_policy_group.w01_edges.path, nsxt_policy_group.w01_hosts.path]
 	services           = [data.nsxt_policy_service.https.path, data.nsxt_policy_service.ssh.path, data.nsxt_policy_service.icmp_all.path]
@@ -157,7 +157,7 @@ resource "nsxt_policy_security_policy" "vcf_environment" {
   }
   
     rule {
-    display_name       = "Allow VI WLD 01 to inself"
+    display_name       = "Allow VI WLD01 to inself"
     source_groups      = [nsxt_policy_group.w01_wld.path, nsxt_policy_group.w01_edges.path, nsxt_policy_group.w01_hosts.path, nsxt_policy_group.w01_nfs.path]
     destination_groups = [nsxt_policy_group.w01_wld.path, nsxt_policy_group.w01_edges.path, nsxt_policy_group.w01_hosts.path, nsxt_policy_group.w01_nfs.path]
     action             = "ALLOW"
@@ -165,7 +165,7 @@ resource "nsxt_policy_security_policy" "vcf_environment" {
   }
   
     rule {
-    display_name       = "Allow VCF Outbound"
+    display_name       = "Allow VCF01 Outbound"
     source_groups      = [nsxt_policy_group.m01_wld.path, nsxt_policy_group.w01_wld.path]
 	services           = [data.nsxt_policy_service.https.path, data.nsxt_policy_service.ssh.path, data.nsxt_policy_service.icmp_all.path]
     action             = "ALLOW"
