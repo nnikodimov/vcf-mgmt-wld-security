@@ -264,5 +264,10 @@ resource "nsxt_policy_service" "tcp-elm" {
     protocol          = "TCP"
     destination_ports = ["2012", "2020"]
   }
+  
+    l4_port_set_entry {
+    display_name      = "vc-elm-source"
+    protocol          = "TCP"
+    source_ports = ["443"]
+  }
 }
-
