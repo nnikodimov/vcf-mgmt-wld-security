@@ -271,3 +271,14 @@ resource "nsxt_policy_service" "tcp-elm" {
     source_ports = ["443"]
   }
 }
+
+resource "nsxt_policy_service" "tcp-5480" {
+  description  = "Workload Domain Deployment"
+  display_name = "TCP-5480"
+
+  l4_port_set_entry {
+    display_name      = "tcp-5480"
+    protocol          = "TCP"
+    destination_ports = ["5480"]
+  }
+}
