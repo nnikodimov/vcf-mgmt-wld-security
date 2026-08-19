@@ -1,121 +1,97 @@
 data "nsxt_policy_service" "icmp_all" {
-  display_name = var.icmp_all
+  display_name = "ICMP ALL"
 }
 
-data "nsxt_policy_service" "dns_tcp" {
-  display_name = var.dns_tcp
-}
-
-data "nsxt_policy_service" "activdir" {
-  display_name = var.activdir
-}
-
-data "nsxt_policy_service" "dns_udp" {
-  display_name = var.dns_udp
-}
-
-data "nsxt_policy_service" "dhcp_server" {
-  display_name = var.dhcp_server
+data "nsxt_policy_service" "icmp_echo" {
+  display_name = "ICMP Echo Request"
 }
 
 data "nsxt_policy_service" "https" {
-  display_name = var.https
+  display_name = "HTTPS"
 }
 
 data "nsxt_policy_service" "http" {
-  display_name = var.http
+  display_name = "HTTP"
 }
 
 data "nsxt_policy_service" "ldap" {
-  display_name = var.ldap
+  display_name = "LDAP"
+}
+
+data "nsxt_policy_service" "ldap_udp" {
+  display_name = "LDAP-UDP"
 }
 
 data "nsxt_policy_service" "ldaps" {
-  display_name = var.ldaps
+  display_name = "LDAP-over-SSL"
 }
 
 data "nsxt_policy_service" "ssh" {
-  display_name = var.ssh
-}
-
-data "nsxt_policy_service" "syslog_udp" {
-  display_name = var.syslog_udp
-}
-
-data "nsxt_policy_service" "syslog_tcp" {
-  display_name = var.syslog_tcp
+  display_name = "SSH"
 }
 
 data "nsxt_policy_service" "snmp" {
-  display_name = var.snmp
-}
-
-data "nsxt_policy_service" "ntp" {
-  display_name = var.ntp
+  display_name = "SNMP"
 }
 
 data "nsxt_policy_service" "rdp" {
-  display_name = var.rdp
+  display_name = "RDP"
 }
 
 data "nsxt_policy_service" "update_manager" {
-  display_name = var.update_manager
+  display_name = "Update Manager"
 }
 
 #data "nsxt_policy_service" "tcp_902" {
-#  display_name = var.tcp_902
+#  display_name = "VMware-ESXi5.x-TCP"
 #}
 
 data "nsxt_policy_service" "udp_902" {
-  display_name = var.udp_902
+  display_name = "VMware-ESXi5.x-UDP"
 }
 
 #data "nsxt_policy_service" "tcp_9000_9100" {
-#  display_name = var.tcp_9000_9100
+#  display_name = "VMware-UpdateMgr"
 #}
 
 data "nsxt_policy_service" "tcp_9087" {
-  display_name = var.tcp_9087
+  display_name = "Vmware-UpdateMgr-update"
 }
 
 data "nsxt_policy_service" "tcp_9084" {
-  display_name = var.tcp_9084
+  display_name = "VMware-UpdateMgr-VUM"
 }
 
 data "nsxt_policy_service" "ftp" {
-  display_name = var.ftp
+  display_name = "FTP"
 }
 
 data "nsxt_policy_service" "smtp" {
-  display_name = var.smtp
+  display_name = "SMTP"
 }
 
 data "nsxt_policy_service" "smtp_tls" {
-  display_name = var.smtp_tls
+  display_name = "SMTP_TLS"
 }
 
 data "nsxt_policy_context_profile" "cxt_activdir" {
-  display_name = var.cxt_activdir
+  display_name = "ACTIVDIR"
 }
 
 data "nsxt_policy_context_profile" "cxt_ldap" {
-  display_name = var.cxt_ldap
-}
-
-data "nsxt_policy_context_profile" "cxt_dns" {
-  display_name = var.cxt_dns
+  display_name = "LDAP"
 }
 
 data "nsxt_policy_context_profile" "cxt_ssl" {
-  display_name = var.cxt_ssl
+  display_name = "SSL"
 }
 
 data "nsxt_policy_context_profile" "cxt_dcerpc" {
-  display_name = var.cxt_dcerpc
+  display_name = "DCERPC"
 }
 
 data "nsxt_policy_context_profile" "cxt_ssh" {
-  display_name = var.cxt_ssh
+  display_name = "SSH"
 }
 
 resource "nsxt_policy_service" "tcp_2012_2020" {
@@ -164,7 +140,7 @@ resource "nsxt_policy_service" "tcp_7475_7476" {
 
   l4_port_set_entry {
     protocol          = "TCP"
-    destination_ports = ["7475","7475"]
+    destination_ports = ["7475","7476"]
   }
 }
 
@@ -228,16 +204,6 @@ resource "nsxt_policy_service" "tcp_8443" {
   }
 }
 
-resource "nsxt_policy_service" "tcp_9543" {
-  description  = "Aria Suite LCM"
-  display_name = "TCP-9543"
-
-  l4_port_set_entry {
-    protocol          = "TCP"
-    destination_ports = ["9543"]
-  }
-}
-
 resource "nsxt_policy_service" "tcp_16520" {
   description  = "Aria Suite LCM"
   display_name = "TCP-16520"
@@ -279,11 +245,95 @@ resource "nsxt_policy_service" "tcp_6443" {
 }
 
 resource "nsxt_policy_service" "tcp_5000" {
-  description  = "vSphere Supervizor"
+  description  = "vSphere Supervisor"
   display_name = "TCP-5000"
 
   l4_port_set_entry {
     protocol          = "TCP"
     destination_ports = ["5000"]
   }
+}
+
+resource "nsxt_policy_service" "tcp_9092" {
+  description  = "SSP Messaging"
+  display_name = "TCP-9092"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["9092"]
+  }
+}
+
+resource "nsxt_policy_service" "tcp_30000_30005" {
+  description  = "VCF Ops LCM"
+  display_name = "TCP-30000_30005"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["30000-30005"]
+  }
+}
+
+resource "nsxt_policy_service" "tcp_1991" {
+  description  = "VCF Operations for Networks tcp-1991"
+  display_name = "TCP-1991"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["1991"]
+  }
+}
+
+resource "nsxt_policy_service" "udp_2055" {
+  description  = "VCF Operations for Networks udp-2055"
+  display_name = "UDP-2055"
+
+  l4_port_set_entry {
+    protocol          = "UDP"
+    destination_ports = ["2055"]
+  }
+}
+
+resource "nsxt_policy_service" "tcp_1443" {
+  description  = "IOFilterVP service"
+  display_name = "TCP-1443"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["1443"]
+  }
+}
+
+resource "nsxt_policy_service" "tcp_4505_4506" {
+  description  = "VCF Management Service"
+  display_name = "TCP-4505-4506"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["4505-4506"]
+  }
+}
+
+resource "nsxt_policy_context_profile_custom_attribute" "custom_fqdn1" {
+  key       = "DOMAIN_NAME"
+  attribute = "*.broadcom.com"
+}
+
+resource "nsxt_policy_context_profile_custom_attribute" "custom_fqdn2" {
+  key       = "DOMAIN_NAME"
+  attribute = "*.vmware.com"
+}
+
+resource "nsxt_policy_context_profile_custom_attribute" "custom_fqdn3" {
+  key       = "DOMAIN_NAME"
+  attribute = "*.broadcom.net"
+}
+
+resource "nsxt_policy_context_profile" "internet_fqdns" {
+  display_name = "INTERNET_FQDNS"
+  description  = "VCF upgrade and patch binaries"
+  domain_name {
+     value       = ["*.broadcom.com", "*.vmware.com", "*.broadcom.net"]
+  }
+  depends_on = [nsxt_policy_context_profile_custom_attribute.custom_fqdn1,nsxt_policy_context_profile_custom_attribute.custom_fqdn2,nsxt_policy_context_profile_custom_attribute.custom_fqdn3]
 }

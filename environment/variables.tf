@@ -1,42 +1,4 @@
-# NSX Manager connection
-
-variable "nsx_manager" {
-  type        = string
-  description = "NSX Manager cluster VIP hostname or IP address"
-}
-
-variable "nsx_username" {
-  type        = string
-  description = "NSX Manager Enterprise Administrator username"
-}
-
-variable "nsx_password" {
-  type        = string
-  sensitive   = true
-  description = "NSX Manager Enterprise Administrator password"
-}
-
-# External infrastructure services
-
-variable "dns_server" {
-  type        = string
-  description = "DNS server IP address"
-}
-
-variable "ntp_server" {
-  type        = string
-  description = "NTP server IP address"
-}
-
-variable "dhcp_server" {
-  type        = string
-  description = "DHCP server IP address"
-}
-
-variable "ad_server" {
-  type        = string
-  description = "Active Directory server IP address"
-}
+# Environment services
 
 variable "smtp_server" {
   type        = string
