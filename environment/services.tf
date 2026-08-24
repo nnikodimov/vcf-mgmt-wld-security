@@ -214,6 +214,16 @@ resource "nsxt_policy_service" "tcp_16520" {
   }
 }
 
+resource "nsxt_policy_service" "tcp_9543" {
+  description  = "Aria Suite LCM"
+  display_name = "TCP-9543"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["9543"]
+  }
+}
+
 resource "nsxt_policy_service" "tcp_1514" {
   description  = "Aria Operations for Logs"
   display_name = "TCP-1514"

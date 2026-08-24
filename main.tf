@@ -75,6 +75,7 @@ module "infrastructure" {
 
   vcf_f_path        = module.environment.vcf_f_path
   vcf_ops_logs_path = module.environment.vcf_ops_logs_path
+  tcp_9543_path     = module.environment.service_paths["tcp_9543"]
 }
 
 module "application_fm" {

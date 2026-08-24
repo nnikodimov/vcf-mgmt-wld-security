@@ -49,7 +49,7 @@ resource "nsxt_policy_security_policy" "vcf_infrastructure" {
   rule {
     display_name       = "VCF01 Syslog Traffic"
     destination_groups = [var.vcf_ops_logs_path]
-    services           = [data.nsxt_policy_service.syslog_tcp.path,data.nsxt_policy_service.syslog_udp.path,nsxt_policy_service.tcp_9543.path]
+    services           = [data.nsxt_policy_service.syslog_tcp.path,data.nsxt_policy_service.syslog_udp.path,var.tcp_9543_path]
     action             = "ALLOW"
 	direction          = "OUT"
     logged             = false

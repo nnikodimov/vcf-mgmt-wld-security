@@ -14,7 +14,7 @@ resource "nsxt_policy_security_policy" "vcf_f_environment" {
     destination_groups = [nsxt_policy_group.vcf_f.path]
     services           = [data.nsxt_policy_service.https.path,data.nsxt_policy_service.ssh.path,data.nsxt_policy_service.icmp_all.path,data.nsxt_policy_service.rdp.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
 
@@ -24,7 +24,7 @@ resource "nsxt_policy_security_policy" "vcf_f_environment" {
     destination_groups = [nsxt_policy_group.vcf_f.path]
     services           = [data.nsxt_policy_service.https.path,data.nsxt_policy_service.ssh.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
   
@@ -33,7 +33,7 @@ resource "nsxt_policy_security_policy" "vcf_f_environment" {
     destination_groups = [nsxt_policy_group.vcf_a.path]
     services           = [data.nsxt_policy_service.https.path]
     action             = "JUMP_TO_APPLICATION"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
 
@@ -43,7 +43,7 @@ resource "nsxt_policy_security_policy" "vcf_f_environment" {
     destination_groups = [nsxt_policy_group.backup_svc.path]
     services           = [data.nsxt_policy_service.ssh.path,data.nsxt_policy_service.ftp.path,data.nsxt_policy_service.icmp_all.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 
@@ -53,7 +53,7 @@ resource "nsxt_policy_security_policy" "vcf_f_environment" {
     destination_groups = [nsxt_policy_group.smtp_svc.path]
     services           = [data.nsxt_policy_service.smtp.path,data.nsxt_policy_service.smtp_tls.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 
@@ -63,7 +63,7 @@ resource "nsxt_policy_security_policy" "vcf_f_environment" {
     services           = [data.nsxt_policy_service.https.path]
     profiles           = [nsxt_policy_context_profile.internet_fqdns.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 }
@@ -92,7 +92,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     destination_groups = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 
@@ -102,7 +102,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     destination_groups = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
     services           = [data.nsxt_policy_service.ssh.path,nsxt_policy_service.tcp_5480.path,data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
   
@@ -112,7 +112,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     destination_groups = [nsxt_policy_group.vcf_fm.path,nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
     services           = [data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
   
@@ -132,7 +132,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     destination_groups = [nsxt_policy_group.vcf01_ops_cp.path]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }  
   
@@ -142,7 +142,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     destination_groups = [nsxt_policy_group.vcf01_ops_net_cn.path]
     services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_1991.path,nsxt_policy_service.udp_2055.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
   
@@ -152,7 +152,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     destination_groups = [nsxt_policy_group.w01_sup01.path]
     services           = [nsxt_policy_service.tcp_6443.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 
@@ -169,7 +169,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
   rule {
     display_name       = "Lock Down"
     action             = "DROP"
-	ip_version		   = "IPV4"
+	  ip_version		   = "IPV4"
     logged             = true
     log_label          = "vcf_fm"
   }
@@ -198,7 +198,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     source_groups      = [nsxt_policy_group.vcf_fm.path]
     destination_groups = [nsxt_policy_group.vcf01_m01.path]
     services           = [data.nsxt_policy_service.https.path]
-	direction          = "IN"
+	  direction          = "IN"
     action             = "ALLOW"
     logged             = false
   }
@@ -209,7 +209,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_m01.path]
     services           = [data.nsxt_policy_service.ssh.path,nsxt_policy_service.tcp_5480.path,data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
   
@@ -219,7 +219,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_m01.path]
     services           = [data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
   
@@ -229,7 +229,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_msvc.path]
     services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_4505_4506.path,nsxt_policy_service.tcp_1514.path,nsxt_policy_service.tcp_9543.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
   
@@ -239,14 +239,14 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_ops_net_cn.path]
     services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_1991.path,nsxt_policy_service.udp_2055.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 
   rule {
     display_name       = "Lock Down"
     action             = "DROP"
-	ip_version		   = "IPV4"
+	  ip_version		   = "IPV4"
     logged             = true
     log_label          = "vcf_m01"
   }
@@ -275,7 +275,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     source_groups      = [nsxt_policy_group.vcf_fm.path]
     destination_groups = [nsxt_policy_group.vcf01_w01.path]
     services           = [data.nsxt_policy_service.https.path]
-	direction          = "IN"
+	  direction          = "IN"
     action             = "ALLOW"
     logged             = false
   }
@@ -286,7 +286,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_w01.path]
     services           = [data.nsxt_policy_service.ssh.path,nsxt_policy_service.tcp_5480.path,data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
   
@@ -296,7 +296,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_w01.path]
     services           = [data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
-	direction          = "IN"
+	  direction          = "IN"
     logged             = false
   }
   
@@ -306,7 +306,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_msvc.path]
     services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_4505_4506.path,nsxt_policy_service.tcp_1514.path,nsxt_policy_service.tcp_9543.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
   
@@ -316,14 +316,14 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     destination_groups = [nsxt_policy_group.vcf01_ops_net_cn.path]
     services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_1991.path,nsxt_policy_service.udp_2055.path]
     action             = "ALLOW"
-	direction          = "OUT"
+	  direction          = "OUT"
     logged             = false
   }
 
   rule {
     display_name       = "Lock Down"
     action             = "DROP"
-	ip_version		   = "IPV4"
+	  ip_version		   = "IPV4"
     logged             = true
     log_label          = "vcf_w01"
   }

@@ -29,13 +29,3 @@ data "nsxt_policy_service" "syslog_tcp" {
 data "nsxt_policy_context_profile" "cxt_dns" {
   display_name = "DNS"
 }
-
-resource "nsxt_policy_service" "tcp_9543" {
-  description  = "Aria Suite LCM"
-  display_name = "TCP-9543"
-
-  l4_port_set_entry {
-    protocol          = "TCP"
-    destination_ports = ["9543"]
-  }
-}
