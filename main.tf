@@ -33,6 +33,7 @@ module "environment" {
   vcfops_net    = var.vcfops_net
   vcfa          = var.vcfa
   vcf_lic       = var.vcf_lic
+  vcf_lhub      = var.vcf_lhub
   sddc          = var.sddc
   vcfops_cp     = var.vcfops_cp
   vcfops_net_cn = var.vcfops_net_cn

@@ -274,6 +274,26 @@ resource "nsxt_policy_service" "tcp_9092" {
   }
 }
 
+resource "nsxt_policy_service" "tcp_3260" {
+  description  = "iSCSI"
+  display_name = "TCP-3260"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["3260"]
+  }
+}
+
+resource "nsxt_policy_service" "tcp_2049" {
+  description  = "NFS"
+  display_name = "TCP-2049"
+
+  l4_port_set_entry {
+    protocol          = "TCP"
+    destination_ports = ["2049"]
+  }
+}
+
 resource "nsxt_policy_service" "tcp_30000_30005" {
   description  = "VCF Ops LCM"
   display_name = "TCP-30000_30005"

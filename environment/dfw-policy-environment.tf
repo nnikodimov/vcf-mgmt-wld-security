@@ -177,14 +177,34 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
   }
 
   rule {
-    display_name       = "vCenter Servers to VCF Licene Server"
+    display_name       = "vCenter Servers to VCF License Server"
     source_groups      = [nsxt_policy_group.m01_vc.path,nsxt_policy_group.w01_vc.path]
     destination_groups = [nsxt_policy_group.vcf_lic.path]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
-  }  
+  }
+
+  rule {
+    display_name       = "vDefend License Hub to Endpoints"
+    source_groups      = [nsxt_policy_group.vcf_lhub.path]
+    destination_groups = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_3260.path,nsxt_policy_service.tcp_2049.path]
+    action             = "ALLOW"
+    direction          = "OUT"
+    logged             = false
+  }
+
+  rule {
+    display_name       = "Endpoints to vDefend License Hub"
+    source_groups      = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
+    destination_groups = [nsxt_policy_group.vcf_lhub.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_9092.path]
+    action             = "ALLOW"
+    direction          = "IN"
+    logged             = false
+  }     
 
   rule {
     display_name       = "Lock Down"
@@ -232,6 +252,16 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
 	direction          = "IN"
     logged             = false
   }
+
+  rule {
+    display_name       = "Management Domain NSX Manager to SDDC Manager - Backup"
+    source_groups      = [nsxt_policy_group.m01_nsx.path]
+    destination_groups = [nsxt_policy_group.vcf01_sddc.path]
+    services           = [data.nsxt_policy_service.ssh.path]
+    action             = "ALLOW"
+    direction          = "OUT"
+    logged             = false
+  }
   
   rule {
     display_name       = "VCF OPS CP to VCF01 Management Domain"
@@ -264,7 +294,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
   }
   
   rule {
-    display_name       = "Management Domain vCenter Server to VCF Licene Server"
+    display_name       = "Management Domain vCenter Server to VCF License Server"
     source_groups      = [nsxt_policy_group.m01_vc.path]
     destination_groups = [nsxt_policy_group.vcf_lic.path]
     services           = [data.nsxt_policy_service.https.path]
@@ -274,10 +304,20 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
   }
 
   rule {
-    display_name       = "Management Domain NSX Manager to SDDC Manager - Backup"
-    source_groups      = [nsxt_policy_group.m01_nsx.path]
-    destination_groups = [nsxt_policy_group.vcf01_sddc.path]
-    services           = [data.nsxt_policy_service.ssh.path]
+    display_name       = "vDefend License Hub to Endpoints"
+    source_groups      = [nsxt_policy_group.vcf_lhub.path]
+    destination_groups = [nsxt_policy_group.vcf01_m01.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_3260.path,nsxt_policy_service.tcp_2049.path]
+    action             = "ALLOW"
+    direction          = "IN"
+    logged             = false
+  }
+
+  rule {
+    display_name       = "Endpoints to vDefend License Hub"
+    source_groups      = [nsxt_policy_group.vcf01_m01.path]
+    destination_groups = [nsxt_policy_group.vcf_lhub.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_9092.path]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -329,6 +369,16 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
 	direction          = "IN"
     logged             = false
   }
+
+  rule {
+    display_name       = "Workload Domain NSX Manager to SDDC Manager - Backup"
+    source_groups      = [nsxt_policy_group.w01_nsx.path]
+    destination_groups = [nsxt_policy_group.vcf01_sddc.path]
+    services           = [data.nsxt_policy_service.ssh.path]
+    action             = "ALLOW"
+    direction          = "OUT"
+    logged             = false
+  }
   
   rule {
     display_name       = "VCF OPS CP to VCF01 Workload Domain 01"
@@ -361,7 +411,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
   }
   
   rule {
-    display_name       = "Workload Domain vCenter Server to VCF Licene Server"
+    display_name       = "Workload Domain vCenter Server to VCF License Server"
     source_groups      = [nsxt_policy_group.w01_vc.path]
     destination_groups = [nsxt_policy_group.vcf_lic.path]
     services           = [data.nsxt_policy_service.https.path]
@@ -369,12 +419,22 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     direction          = "OUT"
     logged             = false
   }
-  
+
   rule {
-    display_name       = "Workload Domain NSX Manager to SDDC Manager - Backup"
-    source_groups      = [nsxt_policy_group.w01_nsx.path]
-    destination_groups = [nsxt_policy_group.vcf01_sddc.path]
-    services           = [data.nsxt_policy_service.ssh.path]
+    display_name       = "vDefend License Hub to Endpoints"
+    source_groups      = [nsxt_policy_group.vcf_lhub.path]
+    destination_groups = [nsxt_policy_group.vcf01_w01.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_3260.path,nsxt_policy_service.tcp_2049.path]
+    action             = "ALLOW"
+    direction          = "IN"
+    logged             = false
+  }
+
+  rule {
+    display_name       = "Endpoints to vDefend License Hub"
+    source_groups      = [nsxt_policy_group.vcf01_w01.path]
+    destination_groups = [nsxt_policy_group.vcf_lhub.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_9092.path]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false

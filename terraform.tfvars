@@ -18,6 +18,7 @@ vcfops_logs            = "vcfops-logs"
 vcfops_net             = "vrni-platform"
 vcfa                   = "vcfa-"
 vcf_lic                = "license01"
+vcf_lhub               = "m01-lh01"
 
 sddc                   = "sddcmgr"
 vcfops_cp              = "vcfopscp"

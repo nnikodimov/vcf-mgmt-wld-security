@@ -64,6 +64,8 @@ output "service_paths" {
     tcp_16520       = nsxt_policy_service.tcp_16520.path
     tcp_1991        = nsxt_policy_service.tcp_1991.path
     tcp_2012_2020   = nsxt_policy_service.tcp_2012_2020.path
+    tcp_2049        = nsxt_policy_service.tcp_2049.path
+    tcp_3260        = nsxt_policy_service.tcp_3260.path
     tcp_30000_30005 = nsxt_policy_service.tcp_30000_30005.path
     tcp_4505_4506   = nsxt_policy_service.tcp_4505_4506.path
     tcp_5000        = nsxt_policy_service.tcp_5000.path
