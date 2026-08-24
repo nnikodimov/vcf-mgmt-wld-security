@@ -140,7 +140,7 @@ resource "nsxt_policy_group" "m01_avi_se" {
   
   criteria {
     ipaddress_expression {
-      ip_addresses = ["172.16.22.11-172.16.22.100"]
+      ip_addresses = ["10.255.240.0/24"]
     }
   }
 }
