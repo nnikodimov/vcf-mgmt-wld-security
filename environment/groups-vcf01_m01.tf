@@ -108,19 +108,9 @@ resource "nsxt_policy_group" "m01_nsx" {
   criteria {
     condition {
       member_type = "VirtualMachine"
-      key         = "Tag"
-      operator    = "EQUALS"
-      value       = "m01|nsx01"
-    }
-  }
-
-  conjunction {
-    operator = "OR"
-  }
-
-  criteria {
-    ipaddress_expression {
-      ip_addresses = ["172.16.10.50-172.16.10.51"]
+      key         = "Name"
+      operator    = "STARTSWITH"
+      value       = var.m01_nsx_manager_a
     }
   }
 }
@@ -131,9 +121,9 @@ resource "nsxt_policy_group" "m01_avi" {
   criteria {
     condition {
       member_type = "VirtualMachine"
-      key         = "Tag"
-      operator    = "EQUALS"
-      value       = "m01|avi01"
+      key         = "Name"
+      operator    = "STARTSWITH"
+      value       = var.m01_avi_controller_a
     }
   }
 }

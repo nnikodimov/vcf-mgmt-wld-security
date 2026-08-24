@@ -80,5 +80,6 @@ output "service_paths" {
     tcp_9040        = nsxt_policy_service.tcp_9040.path
     tcp_9092        = nsxt_policy_service.tcp_9092.path
     udp_2055        = nsxt_policy_service.udp_2055.path
+	tcp_9543        = nsxt_policy_service.tcp_9543.path
   }
 }
