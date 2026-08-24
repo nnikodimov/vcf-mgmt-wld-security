@@ -1,6 +1,6 @@
-nsx_manager            = "m01-nsx01.vcf01.ans.lab"
-nsx_username           = "admin"
-nsx_password           = "VMware1!VMware1!"
+nsx_manager            = "<nsx manager cluster vip IP>"
+nsx_username           = "<nsx manager enterprise administrator name>"
+nsx_password           = "<nsx manager enterprise administrator password>"
 
 dns_server             = "192.168.110.10"
 ntp_server             = "192.168.110.1"
