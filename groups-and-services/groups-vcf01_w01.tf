@@ -131,7 +131,7 @@ resource "nsxt_policy_group" "w01_avi" {
 resource "nsxt_policy_group" "w01_avi_se" {
   nsx_id       = "W01_AVI_SE"
   display_name = "W01_AVI_SE"
-  
+
   criteria {
     ipaddress_expression {
       ip_addresses = ["172.16.23.11-172.16.23.100"]
@@ -143,7 +143,7 @@ resource "nsxt_policy_group" "w01_edges" {
   nsx_id       = "W01_EDGES"
   display_name = "W01_EDGES"
   group_type   = "IPAddress"
-  
+
   tag {
     scope = "w01"
     tag   = "edges"
@@ -160,7 +160,7 @@ resource "nsxt_policy_group" "w01_hosts" {
   nsx_id       = "W01_HOSTS"
   display_name = "W01_HOSTS"
   group_type   = "IPAddress"
-  
+
   tag {
     scope = "w01"
     tag   = "hosts"
@@ -276,16 +276,16 @@ resource "nsxt_policy_group" "vcf01_w01" {
       value       = "w01|"
     }
   }
-  
-#  conjunction {
-#    operator = "OR"
-#  }
-#
-#  criteria {
-#    path_expression {
-#      member_paths = [nsxt_policy_group.w01_vc.path,nsxt_policy_group.w01_ssp.path]
-#    }
-#  }
+
+  #  conjunction {
+  #    operator = "OR"
+  #  }
+  #
+  #  criteria {
+  #    path_expression {
+  #      member_paths = [nsxt_policy_group.w01_vc.path,nsxt_policy_group.w01_ssp.path]
+  #    }
+  #  }
 }
 
 

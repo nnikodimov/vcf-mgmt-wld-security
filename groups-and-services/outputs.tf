@@ -1,26 +1,17 @@
-output "vcf_f_path" {
-  description = "Policy path of the VCF_FLEET group, used by the infrastructure module to scope its policy"
-  value       = nsxt_policy_group.vcf_f.path
-}
-
-output "vcf_ops_logs_path" {
-  description = "Policy path of the VCF_OPS_LOGS group, used by the infrastructure module's syslog rule"
-  value       = nsxt_policy_group.vcf_ops_logs.path
-}
-
 output "group_paths" {
-  description = "Map of all NSX group names defined in this module to their policy path, for consumption by the application modules"
+  description = "Map of all NSX group names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure, application/*)"
   value = {
-    backup_svc       = nsxt_policy_group.backup_svc.path
-    bastion          = nsxt_policy_group.bastion.path
-    siem_svc         = nsxt_policy_group.siem_svc.path
-    smtp_svc         = nsxt_policy_group.smtp_svc.path
-    tools            = nsxt_policy_group.tools.path
+    backup_svc = nsxt_policy_group.backup_svc.path
+    bastion    = nsxt_policy_group.bastion.path
+    siem_svc   = nsxt_policy_group.siem_svc.path
+    smtp_svc   = nsxt_policy_group.smtp_svc.path
+    tools      = nsxt_policy_group.tools.path
 
     vcf_a            = nsxt_policy_group.vcf_a.path
     vcf_a_lb         = nsxt_policy_group.vcf_a_lb.path
     vcf_f            = nsxt_policy_group.vcf_f.path
     vcf_fm           = nsxt_policy_group.vcf_fm.path
+    vcf_lhub         = nsxt_policy_group.vcf_lhub.path
     vcf_lic          = nsxt_policy_group.vcf_lic.path
     vcf_ops          = nsxt_policy_group.vcf_ops.path
     vcf_ops_fm       = nsxt_policy_group.vcf_ops_fm.path
@@ -56,7 +47,7 @@ output "group_paths" {
 }
 
 output "service_paths" {
-  description = "Map of all custom NSX service names defined in this module to their policy path, for consumption by the application modules"
+  description = "Map of all custom NSX service names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure, application/*)"
   value = {
     tcp_1234_1235   = nsxt_policy_service.tcp_1234_1235.path
     tcp_1443        = nsxt_policy_service.tcp_1443.path
@@ -83,5 +74,12 @@ output "service_paths" {
     tcp_9092        = nsxt_policy_service.tcp_9092.path
     tcp_9543        = nsxt_policy_service.tcp_9543.path
     udp_2055        = nsxt_policy_service.udp_2055.path
+  }
+}
+
+output "context_profile_paths" {
+  description = "Map of custom NSX context profile names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure, application/*)"
+  value = {
+    internet_fqdns = nsxt_policy_context_profile.internet_fqdns.path
   }
 }

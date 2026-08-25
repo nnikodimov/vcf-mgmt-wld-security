@@ -132,12 +132,12 @@ resource "nsxt_policy_group" "m01_avi_se" {
   nsx_id       = "M01_AVI_SE"
   display_name = "M01_AVI_SE"
   group_type   = "IPAddress"
-  
+
   tag {
     scope = "m01"
     tag   = "avi_se"
   }
-  
+
   criteria {
     ipaddress_expression {
       ip_addresses = ["10.255.240.0/24"]
@@ -149,7 +149,7 @@ resource "nsxt_policy_group" "m01_edges" {
   nsx_id       = "M01_EDGES"
   display_name = "M01_EDGES"
   group_type   = "IPAddress"
-  
+
   tag {
     scope = "m01"
     tag   = "edges"
@@ -197,7 +197,7 @@ resource "nsxt_policy_vm_tags" "vm16_tags" {
 resource "nsxt_policy_group" "vcf01_sspi" {
   nsx_id       = "VCF01_SSPI"
   display_name = "VCF01_SSPI"
-  
+
   criteria {
     condition {
       member_type = "VirtualMachine"
@@ -231,7 +231,7 @@ resource "nsxt_policy_group" "m01_sspm" {
     scope = "m01"
     tag   = "sspm"
   }
-  
+
   criteria {
     ipaddress_expression {
       ip_addresses = [var.m01_sspm]
@@ -270,14 +270,14 @@ resource "nsxt_policy_group" "vcf01_m01" {
       value       = "m01|"
     }
   }
-  
+
   conjunction {
     operator = "OR"
   }
 
   criteria {
     path_expression {
-      member_paths = [nsxt_policy_group.m01_vc.path,nsxt_policy_group.m01_ssp.path]
+      member_paths = [nsxt_policy_group.m01_vc.path, nsxt_policy_group.m01_ssp.path]
     }
   }
 }

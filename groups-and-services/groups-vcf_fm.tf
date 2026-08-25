@@ -270,23 +270,23 @@ resource "nsxt_policy_group" "vcf_fm" {
   conjunction {
     operator = "OR"
   }
-  
+
   criteria {
     path_expression {
       member_paths = [nsxt_policy_group.vcf_a.path]
     }
   }
-  
+
   conjunction {
     operator = "OR"
   }
-  
+
   criteria {
     path_expression {
       member_paths = [nsxt_policy_group.vcf01_msvc.path]
     }
   }
-  
+
   conjunction {
     operator = "OR"
   }
@@ -317,7 +317,7 @@ resource "nsxt_policy_group" "vcf_f" {
 
   criteria {
     path_expression {
-      member_paths = [nsxt_policy_group.vcf_fm.path,nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
+      member_paths = [nsxt_policy_group.vcf_fm.path, nsxt_policy_group.vcf01_m01.path, nsxt_policy_group.vcf01_w01.path]
     }
   }
 }

@@ -18,8 +18,8 @@ provider "nsxt" {
   retry_on_status_codes = [429]
 }
 
-module "environment" {
-  source = "./environment"
+module "groups_and_services" {
+  source = "./groups-and-services"
 
   smtp_server   = var.smtp_server
   bastion_host  = var.bastion_host
@@ -66,6 +66,14 @@ module "environment" {
   vm_management_dvpg = var.vm_management_dvpg
 }
 
+module "environment" {
+  source = "./environment"
+
+  group_paths           = module.groups_and_services.group_paths
+  service_paths         = module.groups_and_services.service_paths
+  context_profile_paths = module.groups_and_services.context_profile_paths
+}
+
 module "infrastructure" {
   source = "./infrastructure"
 
@@ -74,28 +82,27 @@ module "infrastructure" {
   dhcp_server = var.dhcp_server
   ad_server   = var.ad_server
 
-  vcf_f_path        = module.environment.vcf_f_path
-  vcf_ops_logs_path = module.environment.vcf_ops_logs_path
-  tcp_9543_path     = module.environment.service_paths["tcp_9543"]
+  group_paths   = module.groups_and_services.group_paths
+  service_paths = module.groups_and_services.service_paths
 }
 
 module "application_fm" {
   source = "./application/fm"
 
-  group_paths   = module.environment.group_paths
-  service_paths = module.environment.service_paths
+  group_paths   = module.groups_and_services.group_paths
+  service_paths = module.groups_and_services.service_paths
 }
 
 module "application_m01" {
   source = "./application/m01"
 
-  group_paths   = module.environment.group_paths
-  service_paths = module.environment.service_paths
+  group_paths   = module.groups_and_services.group_paths
+  service_paths = module.groups_and_services.service_paths
 }
 
 module "application_w01" {
   source = "./application/w01"
 
-  group_paths   = module.environment.group_paths
-  service_paths = module.environment.service_paths
+  group_paths   = module.groups_and_services.group_paths
+  service_paths = module.groups_and_services.service_paths
 }

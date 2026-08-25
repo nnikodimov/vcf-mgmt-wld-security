@@ -18,17 +18,12 @@ variable "ad_server" {
   description = "Active Directory server IP address"
 }
 
-variable "vcf_f_path" {
-  type        = string
-  description = "Policy path of the VCF_FLEET group, provided by the environment module"
+variable "group_paths" {
+  type        = map(string)
+  description = "Map of NSX group names to policy path, provided by the groups-and-services module"
 }
 
-variable "vcf_ops_logs_path" {
-  type        = string
-  description = "Policy path of the VCF_OPS_LOGS group, provided by the environment module"
-}
-
-variable "tcp_9543_path" {
-  type        = string
-  description = "Policy path of the TCP-9543 (Aria Suite LCM) service, provided by the environment module"
+variable "service_paths" {
+  type        = map(string)
+  description = "Map of custom NSX service names to policy path, provided by the groups-and-services module"
 }

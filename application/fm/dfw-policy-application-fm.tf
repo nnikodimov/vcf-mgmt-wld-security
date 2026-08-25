@@ -1,17 +1,17 @@
 resource "nsxt_policy_security_policy" "vcfops_policy" {
-  display_name = "VCF Operations Policy"
-  description  = "VCF Operations Policy"
-  category     = "Application"
-  locked       = false
-  stateful     = true
-  tcp_strict   = true
-  scope        = [var.group_paths["vcf_ops"],var.group_paths["vcf_ops_fm"],var.group_paths["vcf01_ops_cp"],var.group_paths["vcf01_sddc"]]
+  display_name    = "VCF Operations Policy"
+  description     = "VCF Operations Policy"
+  category        = "Application"
+  locked          = false
+  stateful        = true
+  tcp_strict      = true
+  scope           = [var.group_paths["vcf_ops"], var.group_paths["vcf_ops_fm"], var.group_paths["vcf01_ops_cp"], var.group_paths["vcf01_sddc"]]
   sequence_number = 1
 
   rule {
     display_name       = "VCF Ops HTTPS"
-    source_groups      = [var.group_paths["vcf_ops"],var.group_paths["vcf_ops_fm"],var.group_paths["vcf01_ops_cp"],var.group_paths["vcf01_sddc"]]
-    destination_groups = [var.group_paths["vcf_ops"],var.group_paths["vcf_ops_fm"],var.group_paths["vcf01_ops_cp"],var.group_paths["vcf01_sddc"]]
+    source_groups      = [var.group_paths["vcf_ops"], var.group_paths["vcf_ops_fm"], var.group_paths["vcf01_ops_cp"], var.group_paths["vcf01_sddc"]]
+    destination_groups = [var.group_paths["vcf_ops"], var.group_paths["vcf_ops_fm"], var.group_paths["vcf01_ops_cp"], var.group_paths["vcf01_sddc"]]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
     logged             = false
@@ -20,7 +20,7 @@ resource "nsxt_policy_security_policy" "vcfops_policy" {
   rule {
     display_name       = "VCF Ops to VCFA, VCFOPS_LOGS and VCFOPS_NET"
     source_groups      = [var.group_paths["vcf_ops"]]
-    destination_groups = [var.group_paths["vcf_a"],var.group_paths["vcf_ops_logs"],var.group_paths["vcf_ops_net"]]
+    destination_groups = [var.group_paths["vcf_a"], var.group_paths["vcf_ops_logs"], var.group_paths["vcf_ops_net"]]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
     logged             = false
@@ -39,7 +39,7 @@ resource "nsxt_policy_security_policy" "vcfops_policy" {
     display_name       = "VCF Ops Fleet Management to VCFA"
     source_groups      = [var.group_paths["vcf_ops_fm"]]
     destination_groups = [var.group_paths["vcf_a"]]
-    services           = [data.nsxt_policy_service.https.path,data.nsxt_policy_service.ssh.path,var.service_paths["tcp_6443"],var.service_paths["tcp_30000_30005"]]
+    services           = [data.nsxt_policy_service.https.path, data.nsxt_policy_service.ssh.path, var.service_paths["tcp_6443"], var.service_paths["tcp_30000_30005"]]
     action             = "ALLOW"
     logged             = false
   }
@@ -53,19 +53,19 @@ resource "nsxt_policy_security_policy" "vcfops_policy" {
 }
 
 resource "nsxt_policy_security_policy" "vcfops_logs_policy" {
-  display_name = "VCF Operations for Logs Policy"
-  description  = "VCF Operations for Logs Policy"
-  category     = "Application"
-  locked       = false
-  stateful     = true
-  tcp_strict   = true
-  scope        = [var.group_paths["vcf_ops_logs"]]
+  display_name    = "VCF Operations for Logs Policy"
+  description     = "VCF Operations for Logs Policy"
+  category        = "Application"
+  locked          = false
+  stateful        = true
+  tcp_strict      = true
+  scope           = [var.group_paths["vcf_ops_logs"]]
   sequence_number = 2
 
   rule {
     display_name       = "VCF Ops VCFOPS_LOGS"
-    source_groups      = [var.group_paths["vcf_ops"],var.group_paths["vcf_ops_logs"]]
-    destination_groups = [var.group_paths["vcf_ops"],var.group_paths["vcf_ops_logs"]]
+    source_groups      = [var.group_paths["vcf_ops"], var.group_paths["vcf_ops_logs"]]
+    destination_groups = [var.group_paths["vcf_ops"], var.group_paths["vcf_ops_logs"]]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
     logged             = false
@@ -80,13 +80,13 @@ resource "nsxt_policy_security_policy" "vcfops_logs_policy" {
 }
 
 resource "nsxt_policy_security_policy" "vcfops_net_policy" {
-  display_name = "VCF Operations for Networks Policy"
-  description  = "VCF Operations for Networks Policy"
-  category     = "Application"
-  locked       = false
-  stateful     = true
-  tcp_strict   = true
-  scope        = [var.group_paths["vcf01_ops_net_cn"],var.group_paths["vcf_ops_net"]]
+  display_name    = "VCF Operations for Networks Policy"
+  description     = "VCF Operations for Networks Policy"
+  category        = "Application"
+  locked          = false
+  stateful        = true
+  tcp_strict      = true
+  scope           = [var.group_paths["vcf01_ops_net_cn"], var.group_paths["vcf_ops_net"]]
   sequence_number = 3
 
   rule {
@@ -116,13 +116,13 @@ resource "nsxt_policy_security_policy" "vcfops_net_policy" {
 }
 
 resource "nsxt_policy_security_policy" "vcfa_policy" {
-  display_name = "VCF Automation Policy"
-  description  = "VCF Automation Policy"
-  category     = "Application"
-  locked       = false
-  stateful     = true
-  tcp_strict   = true
-  scope        = [var.group_paths["vcf_a"]]
+  display_name    = "VCF Automation Policy"
+  description     = "VCF Automation Policy"
+  category        = "Application"
+  locked          = false
+  stateful        = true
+  tcp_strict      = true
+  scope           = [var.group_paths["vcf_a"]]
   sequence_number = 4
 
   rule {
@@ -138,7 +138,7 @@ resource "nsxt_policy_security_policy" "vcfa_policy" {
     display_name       = "VCF Ops Fleet Management to VCFA"
     source_groups      = [var.group_paths["vcf_ops_fm"]]
     destination_groups = [var.group_paths["vcf_a"]]
-    services           = [data.nsxt_policy_service.https.path,data.nsxt_policy_service.ssh.path,var.service_paths["tcp_6443"],var.service_paths["tcp_30000_30005"]]
+    services           = [data.nsxt_policy_service.https.path, data.nsxt_policy_service.ssh.path, var.service_paths["tcp_6443"], var.service_paths["tcp_30000_30005"]]
     action             = "ALLOW"
     logged             = false
   }
