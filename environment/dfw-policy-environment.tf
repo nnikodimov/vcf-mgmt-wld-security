@@ -100,7 +100,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "SDDC Manager to VCF01 Instance"
     source_groups      = [var.group_paths["vcf01_sddc"]]
     destination_groups = [var.group_paths["vcf01_m01"], var.group_paths["vcf01_w01"]]
-    services           = [data.nsxt_policy_service.ssh.path, var.service_paths["tcp_5480"], data.nsxt_policy_service.icmp_echo.path]
+    services           = [data.nsxt_policy_service.ssh.path, local.tcp_5480, data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -120,7 +120,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "VCF01 Instance to VCF Management Services"
     source_groups      = [var.group_paths["vcf01_m01"], var.group_paths["vcf01_w01"]]
     destination_groups = [var.group_paths["vcf01_msvc"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_4505_4506"], var.service_paths["tcp_1514"], var.service_paths["tcp_9543"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_4505_4506, local.tcp_1514, local.tcp_9543]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -140,7 +140,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "VCF01 to VCF Ops for Net"
     source_groups      = [var.group_paths["vcf01_m01"], var.group_paths["vcf01_w01"]]
     destination_groups = [var.group_paths["vcf01_ops_net_cn"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_1991"], var.service_paths["udp_2055"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_1991, local.udp_2055]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -160,7 +160,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "VCFA to W01 Supervisor"
     source_groups      = [var.group_paths["vcf_a"]]
     destination_groups = [var.group_paths["w01_sup01"]]
-    services           = [var.service_paths["tcp_6443"]]
+    services           = [local.tcp_6443]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -190,7 +190,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "vDefend License Hub to Endpoints"
     source_groups      = [var.group_paths["vcf_lhub"]]
     destination_groups = [var.group_paths["vcf01_m01"], var.group_paths["vcf01_w01"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_3260"], var.service_paths["tcp_2049"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_3260, local.tcp_2049]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -200,7 +200,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "Endpoints to vDefend License Hub"
     source_groups      = [var.group_paths["vcf01_m01"], var.group_paths["vcf01_w01"]]
     destination_groups = [var.group_paths["vcf_lhub"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_9092"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_9092]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -210,7 +210,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
     display_name       = "SSPI to vCenter Servers"
     source_groups      = [var.group_paths["vcf01_sspi"]]
     destination_groups = [var.group_paths["vcf01_m01"], var.group_paths["vcf01_w01"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_6443"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_6443]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -267,7 +267,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     display_name       = "SDDC Manager to VCF01 Management Domain"
     source_groups      = [var.group_paths["vcf01_sddc"]]
     destination_groups = [var.group_paths["vcf01_m01"]]
-    services           = [data.nsxt_policy_service.ssh.path, var.service_paths["tcp_5480"], data.nsxt_policy_service.icmp_echo.path]
+    services           = [data.nsxt_policy_service.ssh.path, local.tcp_5480, data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -297,7 +297,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     display_name       = "VCF01 Management Domain to VCF Management Services"
     source_groups      = [var.group_paths["vcf01_m01"]]
     destination_groups = [var.group_paths["vcf01_msvc"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_4505_4506"], var.service_paths["tcp_1514"], var.service_paths["tcp_9543"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_4505_4506, local.tcp_1514, local.tcp_9543]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -307,7 +307,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     display_name       = "VCF01 Management Domain to VCF Ops for Net"
     source_groups      = [var.group_paths["vcf01_m01"]]
     destination_groups = [var.group_paths["vcf01_ops_net_cn"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_1991"], var.service_paths["udp_2055"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_1991, local.udp_2055]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -327,7 +327,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     display_name       = "vDefend License Hub to Endpoints"
     source_groups      = [var.group_paths["vcf_lhub"]]
     destination_groups = [var.group_paths["vcf01_m01"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_3260"], var.service_paths["tcp_2049"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_3260, local.tcp_2049]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -337,7 +337,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
     display_name       = "Endpoints to vDefend License Hub"
     source_groups      = [var.group_paths["vcf01_m01"]]
     destination_groups = [var.group_paths["vcf_lhub"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_9092"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_9092]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -384,7 +384,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     display_name       = "SDDC Manager to VCF01 Workload Domain 01"
     source_groups      = [var.group_paths["vcf01_sddc"]]
     destination_groups = [var.group_paths["vcf01_w01"]]
-    services           = [data.nsxt_policy_service.ssh.path, var.service_paths["tcp_5480"], data.nsxt_policy_service.icmp_echo.path]
+    services           = [data.nsxt_policy_service.ssh.path, local.tcp_5480, data.nsxt_policy_service.icmp_echo.path]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -414,7 +414,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     display_name       = "VCF01 Workload Domain to VCF Management Services"
     source_groups      = [var.group_paths["vcf01_w01"]]
     destination_groups = [var.group_paths["vcf01_msvc"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_4505_4506"], var.service_paths["tcp_1514"], var.service_paths["tcp_9543"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_4505_4506, local.tcp_1514, local.tcp_9543]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -424,7 +424,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     display_name       = "VCF01 Workload Domain 01 to VCF Ops for Net"
     source_groups      = [var.group_paths["vcf01_w01"]]
     destination_groups = [var.group_paths["vcf01_ops_net_cn"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_1991"], var.service_paths["udp_2055"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_1991, local.udp_2055]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
@@ -444,7 +444,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     display_name       = "vDefend License Hub to Endpoints"
     source_groups      = [var.group_paths["vcf_lhub"]]
     destination_groups = [var.group_paths["vcf01_w01"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_3260"], var.service_paths["tcp_2049"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_3260, local.tcp_2049]
     action             = "ALLOW"
     direction          = "IN"
     logged             = false
@@ -454,7 +454,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
     display_name       = "Endpoints to vDefend License Hub"
     source_groups      = [var.group_paths["vcf01_w01"]]
     destination_groups = [var.group_paths["vcf_lhub"]]
-    services           = [data.nsxt_policy_service.https.path, var.service_paths["tcp_9092"]]
+    services           = [data.nsxt_policy_service.https.path, local.tcp_9092]
     action             = "ALLOW"
     direction          = "OUT"
     logged             = false
