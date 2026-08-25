@@ -299,6 +299,16 @@ resource "nsxt_policy_group" "vcf_fm" {
       value       = "vcf01_m|"
     }
   }
+
+  conjunction {
+    operator = "OR"
+  }
+
+  criteria {
+    path_expression {
+      member_paths = [nsxt_policy_group.vcf01_sspi.path]
+    }
+  }
 }
 
 resource "nsxt_policy_group" "vcf_f" {

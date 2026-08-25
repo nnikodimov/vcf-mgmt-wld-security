@@ -194,9 +194,9 @@ resource "nsxt_policy_vm_tags" "vm16_tags" {
   }
 }
 
-resource "nsxt_policy_group" "m01_sspi" {
-  nsx_id       = "M01_SSPI"
-  display_name = "M01_SSPI"
+resource "nsxt_policy_group" "vcf01_sspi" {
+  nsx_id       = "VCF01_SSPI"
+  display_name = "VCF01_SSPI"
   
   criteria {
     condition {

@@ -39,7 +39,7 @@ output "group_paths" {
     m01_avi_se = nsxt_policy_group.m01_avi_se.path
     m01_edges  = nsxt_policy_group.m01_edges.path
     m01_hosts  = nsxt_policy_group.m01_hosts.path
-    m01_sspi   = nsxt_policy_group.m01_sspi.path
+    vcf01_sspi = nsxt_policy_group.vcf01_sspi.path
     m01_ssp    = nsxt_policy_group.m01_ssp.path
     m01_sspm   = nsxt_policy_group.m01_sspm.path
 

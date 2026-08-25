@@ -207,8 +207,28 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
   }
 
   rule {
+    display_name       = "SSPI to vCenter Servers"
+    source_groups      = [nsxt_policy_group.vcf01_sspi.path]
+    destination_groups = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
+    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_6443.path]
+    action             = "ALLOW"
+    direction          = "OUT"
+    logged             = false
+  }
+
+  rule {
+    display_name       = "vCenter Servers to SSPI Registry"
+    source_groups      = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
+    destination_groups = [nsxt_policy_group.vcf01_sspi.path]
+    services           = [data.nsxt_policy_service.https.path]
+    action             = "ALLOW"
+    direction          = "IN"
+    logged             = false
+  }
+
+  rule {
     display_name       = "Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
 	ip_version		   = "IPV4"
     logged             = true
     log_label          = "vcf_fm"
@@ -325,7 +345,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
   
   rule {
     display_name       = "Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
 	ip_version		   = "IPV4"
     logged             = true
     log_label          = "vcf_m01"
@@ -442,48 +462,9 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
   
   rule {
     display_name       = "Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     ip_version		   = "IPV4"
     logged             = true
     log_label          = "vcf_w01"
-  }
-}
-
-resource "nsxt_policy_security_policy" "m01_sspi_environment" {
-  display_name = "Management Domain SSPI Cross-Domain Environment"
-  description  = "Management Domain SSPI Cross-Domain Environment"
-  category     = "Environment"
-  locked       = false
-  stateful     = true
-  tcp_strict   = true
-  scope        = [nsxt_policy_group.m01_sspi.path]
-  sequence_number = 5
-
-  rule {
-    display_name       = "SSPI to vCenter Servers"
-    source_groups      = [nsxt_policy_group.m01_sspi.path]
-    destination_groups = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
-    services           = [data.nsxt_policy_service.https.path,nsxt_policy_service.tcp_6443.path]
-    action             = "ALLOW"
-    direction          = "OUT"
-    logged             = false
-  }
-
-  rule {
-    display_name       = "vCenter Servers to SSPI Registry"
-    source_groups      = [nsxt_policy_group.vcf01_m01.path,nsxt_policy_group.vcf01_w01.path]
-    destination_groups = [nsxt_policy_group.m01_sspi.path]
-    services           = [data.nsxt_policy_service.https.path]
-    action             = "ALLOW"
-    direction          = "IN"
-    logged             = false
-  }
-
-  rule {
-    display_name       = "Lock Down"
-    action             = "DROP"
-    ip_version         = "IPV4"
-    logged             = true
-    log_label          = "m01_sspi"
   }
 }

@@ -79,7 +79,7 @@ resource "nsxt_policy_security_policy" "w01_vc_policy" {
   rule {
     display_name       = "vCenter Lock Down"
     scope              = [var.group_paths["w01_vc"]]
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "w01_vc"
   }
@@ -152,7 +152,7 @@ resource "nsxt_policy_security_policy" "w01_nsx_policy" {
 
   rule {
     display_name       = "NSX Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "w01_nsx"
   }
@@ -199,7 +199,7 @@ resource "nsxt_policy_security_policy" "w01_avi_policy" {
   rule {
     display_name       = "Avi Lock Down"
     scope              = [var.group_paths["w01_avi"]]
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "w01_avi"
   }
@@ -295,7 +295,7 @@ resource "nsxt_policy_security_policy" "w01_avi_policy" {
 #
 #   rule {
 #     display_name       = "Workload Domain 01 SSP Lock Down"
-#     action             = "DROP"
+#     action             = "ALLOW"
 #     logged             = true
 #     log_label          = "w01_ssp"
 #   }

@@ -46,7 +46,7 @@ resource "nsxt_policy_security_policy" "vcfops_policy" {
 
   rule {
     display_name       = "VCF Operations Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "vcf_ops"
   }
@@ -73,7 +73,7 @@ resource "nsxt_policy_security_policy" "vcfops_logs_policy" {
 
   rule {
     display_name       = "VCF Operations for Logs Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "vcf_ops_logs"
   }
@@ -109,7 +109,7 @@ resource "nsxt_policy_security_policy" "vcfops_net_policy" {
 
   rule {
     display_name       = "VCF Operations for Networks Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "vcf_ops_net"
   }
@@ -154,7 +154,7 @@ resource "nsxt_policy_security_policy" "vcfa_policy" {
 
   rule {
     display_name       = "VCF Automation Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "vcfa"
   }

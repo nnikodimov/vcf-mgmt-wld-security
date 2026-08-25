@@ -46,7 +46,7 @@ resource "nsxt_policy_security_policy" "m01_vc_policy" {
 
   rule {
     display_name       = "SSPI and SSPs to vCenter"
-    source_groups      = [var.group_paths["m01_sspi"],var.group_paths["m01_ssp"]]
+    source_groups      = [var.group_paths["vcf01_sspi"],var.group_paths["m01_ssp"]]
     destination_groups = [var.group_paths["m01_vc"]]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
@@ -65,7 +65,7 @@ resource "nsxt_policy_security_policy" "m01_vc_policy" {
   rule {
     display_name       = "vCenter Lock Down"
     scope              = [var.group_paths["m01_vc"]]
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "m01_vc"
   }
@@ -109,7 +109,7 @@ resource "nsxt_policy_security_policy" "m01_avi_policy" {
 
   rule {
     display_name       = "Avi Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "m01_avi"
   }
@@ -122,12 +122,12 @@ resource "nsxt_policy_security_policy" "m01_ssp_policy" {
   locked       = false
   stateful     = true
   tcp_strict   = true
-  scope        = [var.group_paths["m01_sspi"],var.group_paths["m01_ssp"]]
+  scope        = [var.group_paths["vcf01_sspi"],var.group_paths["m01_ssp"]]
   sequence_number = 7
 
   rule {
     display_name       = "SSPI and SSPs to vCenter"
-    source_groups      = [var.group_paths["m01_sspi"],var.group_paths["m01_ssp"]]
+    source_groups      = [var.group_paths["vcf01_sspi"],var.group_paths["m01_ssp"]]
     destination_groups = [var.group_paths["m01_vc"]]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
@@ -145,7 +145,7 @@ resource "nsxt_policy_security_policy" "m01_ssp_policy" {
 
   rule {
     display_name       = "SSPI to SSP"
-    source_groups      = [var.group_paths["m01_sspi"]]
+    source_groups      = [var.group_paths["vcf01_sspi"]]
     destination_groups = [var.group_paths["m01_ssp"]]
     services           = [var.service_paths["tcp_6443"],data.nsxt_policy_service.https.path]
     action             = "ALLOW"
@@ -155,7 +155,7 @@ resource "nsxt_policy_security_policy" "m01_ssp_policy" {
   rule {
     display_name       = "SSP to SSPI Registry"
     source_groups      = [var.group_paths["m01_ssp"]]
-    destination_groups = [var.group_paths["m01_sspi"]]
+    destination_groups = [var.group_paths["vcf01_sspi"]]
     services           = [data.nsxt_policy_service.https.path]
     action             = "ALLOW"
     logged             = false
@@ -188,7 +188,7 @@ resource "nsxt_policy_security_policy" "m01_ssp_policy" {
 
   rule {
     display_name       = "Management Domain SSP Lock Down"
-    action             = "DROP"
+    action             = "ALLOW"
     logged             = true
     log_label          = "m01_ssp"
   }
