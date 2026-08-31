@@ -228,7 +228,7 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
 
   rule {
     display_name       = "Lock Down"
-    action             = "ALLOW"
+    action             = "DROP"
     ip_version         = "IPV4"
     logged             = true
     log_label          = "vcf_fm"
@@ -345,7 +345,7 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
 
   rule {
     display_name       = "Lock Down"
-    action             = "ALLOW"
+    action             = "DROP"
     ip_version         = "IPV4"
     logged             = true
     log_label          = "vcf_m01"
@@ -462,7 +462,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
 
   rule {
     display_name       = "Lock Down"
-    action             = "ALLOW"
+    action             = "DROP"
     ip_version         = "IPV4"
     logged             = true
     log_label          = "vcf_w01"

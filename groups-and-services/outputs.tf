@@ -1,5 +1,5 @@
 output "group_paths" {
-  description = "Map of all NSX group names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure, application/*)"
+  description = "Map of all NSX group names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure)"
   value = {
     backup_svc = nsxt_policy_group.backup_svc.path
     bastion    = nsxt_policy_group.bastion.path
@@ -47,7 +47,7 @@ output "group_paths" {
 }
 
 output "service_paths" {
-  description = "Map of all custom NSX service names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure, application/*)"
+  description = "Map of all custom NSX service names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure)"
   value = {
     tcp_1234_1235   = nsxt_policy_service.tcp_1234_1235.path
     tcp_1443        = nsxt_policy_service.tcp_1443.path
@@ -78,7 +78,7 @@ output "service_paths" {
 }
 
 output "context_profile_paths" {
-  description = "Map of custom NSX context profile names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure, application/*)"
+  description = "Map of custom NSX context profile names defined in this module to their policy path, for consumption by every policy-bearing module (environment, infrastructure)"
   value = {
     internet_fqdns = nsxt_policy_context_profile.internet_fqdns.path
   }

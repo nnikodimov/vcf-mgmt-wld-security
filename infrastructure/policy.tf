@@ -58,7 +58,7 @@ resource "nsxt_policy_security_policy" "vcf_infrastructure" {
   rule {
     display_name       = "VCF Fleet Management Lock Down"
     services           = [data.nsxt_policy_service.dns_udp.path, data.nsxt_policy_service.dns_tcp.path, data.nsxt_policy_service.ntp.path, data.nsxt_policy_service.dhcp_server.path]
-    action             = "ALLOW"
+    action             = "DROP"
     direction          = "OUT"
     logged             = true
     log_label          = "infra"

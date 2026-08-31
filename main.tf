@@ -85,24 +85,3 @@ module "infrastructure" {
   group_paths   = module.groups_and_services.group_paths
   service_paths = module.groups_and_services.service_paths
 }
-
-module "application_fm" {
-  source = "./application/fm"
-
-  group_paths   = module.groups_and_services.group_paths
-  service_paths = module.groups_and_services.service_paths
-}
-
-module "application_m01" {
-  source = "./application/m01"
-
-  group_paths   = module.groups_and_services.group_paths
-  service_paths = module.groups_and_services.service_paths
-}
-
-module "application_w01" {
-  source = "./application/w01"
-
-  group_paths   = module.groups_and_services.group_paths
-  service_paths = module.groups_and_services.service_paths
-}
