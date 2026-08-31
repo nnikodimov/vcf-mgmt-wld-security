@@ -147,8 +147,8 @@ resource "nsxt_policy_security_policy" "vcf_fm_environment" {
   }
 
   rule {
-    display_name       = "NSX Managers to SDDC Manager - Backup"
-    source_groups      = [var.group_paths["m01_nsx"], var.group_paths["w01_nsx"]]
+    display_name       = "Components Backup on the SDDC Manager"
+    source_groups      = [var.group_paths["m01_nsx"],var.group_paths["w01_nsx"],var.group_paths["m01_avi"]]
     destination_groups = [var.group_paths["vcf01_sddc"]]
     services           = [data.nsxt_policy_service.ssh.path]
     action             = "ALLOW"
@@ -274,8 +274,8 @@ resource "nsxt_policy_security_policy" "vcf01_m01_environment" {
   }
 
   rule {
-    display_name       = "Management Domain NSX Manager to SDDC Manager - Backup"
-    source_groups      = [var.group_paths["m01_nsx"]]
+    display_name       = "Components Backup on the SDDC Manager"
+    source_groups      = [var.group_paths["m01_nsx"],var.group_paths["m01_avi"]]
     destination_groups = [var.group_paths["vcf01_sddc"]]
     services           = [data.nsxt_policy_service.ssh.path]
     action             = "ALLOW"
@@ -391,7 +391,7 @@ resource "nsxt_policy_security_policy" "vcf01_w01_environment" {
   }
 
   rule {
-    display_name       = "Workload Domain NSX Manager to SDDC Manager - Backup"
+    display_name       = "Components Backup on the SDDC Manager"
     source_groups      = [var.group_paths["w01_nsx"]]
     destination_groups = [var.group_paths["vcf01_sddc"]]
     services           = [data.nsxt_policy_service.ssh.path]
